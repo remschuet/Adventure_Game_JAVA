@@ -67,11 +67,11 @@ public class Inventory extends GraphicalEntity{
         return this.isVisible;
     }
 
-    public GraphicalEntity useItem(int numberCallByUser)
+    public String useItem(int numberCallByUser)
     {
         InventoryItem inventoryItem;
         int index = numberCallByUser - 1;
-        GraphicalEntity physicalBlock = null;
+        String physicalBlock = "";
 
         if (this.listInventoryItem.size() >= numberCallByUser) {
             hideItem();

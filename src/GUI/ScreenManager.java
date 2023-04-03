@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
+import java.util.Objects;
 
 public class ScreenManager extends JFrame implements KeyListener {
 
@@ -51,15 +52,25 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     public void tryToUseItemInInventory(InventoryManager inventoryManager, char key)
     {
-        GraphicalEntity physicalBlock = inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
+        String physicalBlockName = inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
 
-        if (physicalBlock != null)
-            createNewBlock();
+        if (!physicalBlockName.equals(""))
+            createNewBlock(physicalBlockName);
     }
 
-    public void createNewBlock()
+    public void createNewBlock(String physicalBlock)
     {
-        System.out.println("Create New Block not available");
+        System.out.println("Create New Block not available for " + physicalBlock);
+
+        for (GraphicalEntity collidedEntity: this.listGraphicalEntity) {
+
+            if(!(collidedEntity.getIfIsActive()) && collidedEntity.getImagePath().equals(physicalBlock))
+            {
+                collidedEntity.setLocation(160, 220);              // new Position
+                // collidedEntity.setInactive();                           // inactive
+                collidedEntity.setActive();                             // active
+            }
+        }
         /*
         Rock rock = new Rock(0, 0, 60, 60, "Rock.png", "RockItem.png");
         rock.setBounds(180, 180, 60, 60);

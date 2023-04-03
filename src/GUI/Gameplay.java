@@ -25,7 +25,7 @@ public class Gameplay {
         this.listGraphicalEntity.add(targetingCursor);
 
         // Create player
-        Player player = new Player(0, 0, 60, 60, "Water.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
+        Player player = new Player(0, 0, 60, 60, "Player.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
         this.listGraphicalEntity.add(player);
         myFrame.setPlayer(player);
         movementEntity.setPlayer(player);
@@ -42,7 +42,6 @@ public class Gameplay {
         // Add entity to screen
         for(GraphicalEntity entity : this.listGraphicalEntity)
             myFrame.add(entity);
-        myFrame.createNewBlock();
 
         // Timer
         MyTimer timer = new MyTimer(movementEntity);

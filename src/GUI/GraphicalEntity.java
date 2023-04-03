@@ -45,4 +45,9 @@ public class GraphicalEntity extends JLabel{
     {
         return this.isActive;
     }
+
+    public String getImagePath()
+    {
+        return this.imagePath;
+    }
 }

@@ -26,15 +26,15 @@ public class InventoryManager {
         ((Inventory) inventory).setVisibility();
     }
 
-    public GraphicalEntity tryToUseInventory(List<GraphicalEntity> listGraphicalEntity, char numberCallUser)
+    public String tryToUseInventory(List<GraphicalEntity> listGraphicalEntity, char numberCallUser)
     {   // use item of the inventory when user enter number 1 to 6
         GraphicalEntity inventory = getInventory(listGraphicalEntity);
-        GraphicalEntity physicalBlock = null;
+        String physicalBlockName = null;
         if(((Inventory) inventory).getVisibility())
-            physicalBlock = ((Inventory) inventory).useItem(Character.getNumericValue(numberCallUser));
+            physicalBlockName = ((Inventory) inventory).useItem(Character.getNumericValue(numberCallUser));
 
 
-        return physicalBlock;
+        return physicalBlockName;
     }
 
     public List<GraphicalEntity> createListCollaborationEntity(List<GraphicalEntity> listGraphicalEntity)
@@ -103,9 +103,9 @@ public class InventoryManager {
 
                 ((Inventory) inventory).setNewItem(((EnvironmentEntity) collidedEntity).getItemNamePNG());
                 // FIX ME
-                collidedEntity.setLocation(160, 220);                // new Position
+                // collidedEntity.setLocation(160, 220);                // new Position
                 collidedEntity.setInactive();                           // inactive
-                collidedEntity.setActive();                             // active
+                // collidedEntity.setActive();                             // active
 
                 //listGraphicalEntity.remove(collidedEntity);
                 //collidedEntity.setIcon(new ImageIcon());//.image.setVisible(false);

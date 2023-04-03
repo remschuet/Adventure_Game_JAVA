@@ -24,10 +24,8 @@ public class InventoryItem extends GraphicalEntity{
         setVisible(true);
     }
 
-    public GraphicalEntity getBlockType()
+    public String getBlockType()
     {
-        Rock rock = new Rock(0, 0, 60, 60, "Rock.png", "RockItem.png");
-
-        return rock;
+        return this.blockType;
     }
 }
