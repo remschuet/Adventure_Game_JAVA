@@ -7,20 +7,20 @@ import java.util.List;
 public class InventoryManager {
 
     public GraphicalEntity getInventory(List<GraphicalEntity> listGraphicalEntity)
-    {
+    {   // return the player inventory
         for (GraphicalEntity entity: listGraphicalEntity)
             if(entity instanceof Inventory)
                 return entity;
         return null;
     }
 
-    public void setInvisible(List<GraphicalEntity> listGraphicalEntity)
-    {
+    public void setInvisibleInventory(List<GraphicalEntity> listGraphicalEntity)
+    {   // Set invisible the player inventory
         GraphicalEntity inventory = getInventory(listGraphicalEntity);
         ((Inventory) inventory).setInvisible();
     }
 
-    public void setStatementVisibility(List<GraphicalEntity> listGraphicalEntity)
+    public void setVisibilityInventory(List<GraphicalEntity> listGraphicalEntity)
     {   // Search and set inventory visibility
         GraphicalEntity inventory = getInventory(listGraphicalEntity);
         ((Inventory) inventory).setVisibility();
@@ -33,12 +33,11 @@ public class InventoryManager {
         if(((Inventory) inventory).getVisibility())
             physicalBlockName = ((Inventory) inventory).useItem(Character.getNumericValue(numberCallUser));
 
-
         return physicalBlockName;
     }
 
     public List<GraphicalEntity> createListCollaborationEntity(List<GraphicalEntity> listGraphicalEntity)
-    {   // return list juste with CollaborationEntity
+    {   // return list with CollaborationEntity in GraphicalEntity
         List<GraphicalEntity> listCollaborativeEntity = new ArrayList<>();
         for(GraphicalEntity entity : listGraphicalEntity)
             if(entity instanceof CollaborationEntity)
@@ -68,14 +67,8 @@ public class InventoryManager {
                     ((CollaborationEntity) EntityCollision).decreaseUsageDurability();
                     if (((CollaborationEntity) EntityCollision).getUsageDurability() <= 0) {
                         listGraphicalEntity.remove(EntityCollision);
-                        EntityCollision.setIcon(new ImageIcon());//.image.setVisible(false);
+                        EntityCollision.setIcon(new ImageIcon());
                     }
-                    /*
-                    static JFrame window;
-                    public static void removeImage(JLabel image) {
-                        image.setVisible(false);
-                        window.remove(image);
-                    */
                 }
                 break;
             }
@@ -99,16 +92,10 @@ public class InventoryManager {
         CollisionEntity collisionEntity = new CollisionEntity();
         if(targetingCursor != null) {
             GraphicalEntity collidedEntity;
-            if ((collidedEntity = collisionEntity.checkCollisionEntity(targetingCursor, listEnvironmentEntity)) != targetingCursor) {
-
+            if ((collidedEntity = collisionEntity.checkCollisionEntity(targetingCursor, listEnvironmentEntity)) != targetingCursor)
+            {
                 ((Inventory) inventory).setNewItem(((EnvironmentEntity) collidedEntity).getItemNamePNG());
-                // FIX ME
-                // collidedEntity.setLocation(160, 220);                // new Position
                 collidedEntity.setInactive();                           // inactive
-                // collidedEntity.setActive();                             // active
-
-                //listGraphicalEntity.remove(collidedEntity);
-                //collidedEntity.setIcon(new ImageIcon());//.image.setVisible(false);
             }
         }
         else

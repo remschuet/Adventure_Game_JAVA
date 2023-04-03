@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-import java.util.Objects;
 
 public class ScreenManager extends JFrame implements KeyListener {
 
@@ -32,7 +31,7 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     public void setInventoryAndPlayer(InventoryManager inventoryManager,char key)
     {
-        inventoryManager.setInvisible(this.listGraphicalEntity);
+        inventoryManager.setInvisibleInventory(this.listGraphicalEntity);
 
         for (GraphicalEntity player: this.listGraphicalEntity)
         {
@@ -60,26 +59,19 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     public void createNewBlock(String physicalBlock)
     {
-        System.out.println("Create New Block not available for " + physicalBlock);
+        boolean blockActive = false;
 
         for (GraphicalEntity collidedEntity: this.listGraphicalEntity) {
 
-            if(!(collidedEntity.getIfIsActive()) && collidedEntity.getImagePath().equals(physicalBlock))
-            {
+            if (!(collidedEntity.getIfIsActive()) && collidedEntity.getImagePath().equals(physicalBlock)) {
                 collidedEntity.setLocation(160, 220);              // new Position
-                // collidedEntity.setInactive();                           // inactive
                 collidedEntity.setActive();                             // active
+                blockActive = true;
+                break;
             }
         }
-        /*
-        Rock rock = new Rock(0, 0, 60, 60, "Rock.png", "RockItem.png");
-        rock.setBounds(180, 180, 60, 60);
-        physicalBlock.setLocation(20, 40);
-        ock.setVisible(true);
-        listGraphicalEntity.add(rock);
-        this.add(rock);
-        int index = this.getComponentCount() - 1; // Index of the last component added
-        this.setComponentZOrder(rock, index); // Moves the object in front of the others */
+        if (!blockActive)
+            System.out.println("Create New Block not available for " + physicalBlock);
     }
 
     @Override
@@ -92,7 +84,7 @@ public class ScreenManager extends JFrame implements KeyListener {
             case 's': movementEntity.moveEntity(0, -10);   setInventoryAndPlayer(inventoryManager, e.getKeyChar()); break;
             case 'd': movementEntity.moveEntity(-10, 0);   setInventoryAndPlayer(inventoryManager, e.getKeyChar()); break;
             case 'w': movementEntity.moveEntity(0, 10);    setInventoryAndPlayer(inventoryManager, e.getKeyChar()); break;
-            case 'e': inventoryManager.setStatementVisibility(this.listGraphicalEntity); break;
+            case 'e': inventoryManager.setVisibilityInventory(this.listGraphicalEntity); break;
             case 'f': inventoryManager.playerSearchCollaborationEntity(this.listGraphicalEntity); break;
             case '1', '2', '3', '4', '5', '6' : tryToUseItemInInventory(inventoryManager, e.getKeyChar()); break;
             case 'q': ; inventoryManager.mineBlock(this.listGraphicalEntity); break;
