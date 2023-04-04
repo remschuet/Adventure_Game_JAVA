@@ -66,16 +66,55 @@ public class ScreenManager extends JFrame implements KeyListener {
                     Gameplay.DIRECTION direction = ((TargetingCursor)cursor).getDirection();
                     switch (direction)
                     {
-                        case LEFT : posX = 130; posY = 250; break;
-                        case RIGHT: posX = 370; posY = 250; break;
-                        case DOWN : posX = 250; posY = 370; break;
-                        case UP: posX = 250; posY = 130; break;
-                        // FIX ME
+                        case LEFT : {
+                            int blocX = (int) Math.floor((this.currentCenterX - 30) / 60);
+                            int blocY = Math.round(this.currentCenterY / 60) + 1;
+                            System.out.println(blocX);
+                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
+                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+                        }
+                        break;
+                        case RIGHT: {
+                            int blocX = (int) Math.ceil((this.currentCenterX -30) / 60.0) + 2;
+                            int blocY = Math.round(this.currentCenterY / 60) + 1;
+                            System.out.println(blocX);
+                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
+                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+                        } break;
+                        case DOWN :
+                        {
+                            int blocY = (int) Math.ceil((this.currentCenterY - 30) / 60.0) + 2;
+                            int blocX = Math.round(this.currentCenterX / 60);
+                            System.out.println(blocY);
+                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
+                            posX = blocX * 60 - (this.currentCenterX - 250 + 30) + 60;
+                        }
+                        break;
+                        case UP: {
+                            int blocY = (int) Math.floor((this.currentCenterY - 30) / 60);
+                            int blocX = Math.round(this.currentCenterX / 60);
+                            System.out.println(blocY);
+                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
+                            posX = blocX * 60 - (this.currentCenterX - 250 + 30) + 60;
+                        }break;
                     }
                 }
             }
             createNewBlock(physicalBlockName, posX, posY);
         }
+
+        /*
+
+                            switch (direction)
+                    {
+                        case LEFT : posX = 130; posY = 250; break;
+                        case RIGHT: posX = 370; posY = 250; break;
+                        case DOWN : posX = 250; posY = 370; break;
+                        case UP: {
+                            posX = 250;
+                            posY = 130;
+                        }break;
+         */
     }
 
     public void createNewBlock(String physicalBlock, int posX, int posY)
@@ -101,10 +140,8 @@ public class ScreenManager extends JFrame implements KeyListener {
         {
             switch (e)
             {
-                case 'w': this.currentCenterY -= moveY; break;
-                case 's': this.currentCenterY -= moveY; break;
-                case 'a': this.currentCenterX -= moveX; break;
-                case 'd': this.currentCenterX -= moveX; break;
+                case 'w', 's'-> this.currentCenterY -= moveY;
+                case 'a', 'd'-> this.currentCenterX -= moveX;
             }
             System.out.println("PosX : " + this.currentCenterX + " PosY : " + this.currentCenterY);
         }
@@ -117,14 +154,14 @@ public class ScreenManager extends JFrame implements KeyListener {
 
         switch (e.getKeyChar())
         {
-            case 'a': callMovement(10, 0, inventoryManager, e.getKeyChar()); break;
-            case 's': callMovement(0, -10, inventoryManager, e.getKeyChar()); break;
-            case 'd': callMovement(-10, 0, inventoryManager, e.getKeyChar()); break;
-            case 'w': callMovement(0, 10, inventoryManager, e.getKeyChar()); break;
-            case 'e': inventoryManager.setVisibilityInventory(this.listGraphicalEntity); break;
-            case 'f': inventoryManager.playerSearchCollaborationEntity(this.listGraphicalEntity); break;
-            case '1', '2', '3', '4', '5', '6' : tryToUseItemInInventory(inventoryManager, e.getKeyChar()); break;
-            case 'q': ; inventoryManager.mineBlock(this.listGraphicalEntity); break;
+            case 'a'-> callMovement(10, 0, inventoryManager, e.getKeyChar());
+            case 's'-> callMovement(0, -10, inventoryManager, e.getKeyChar());
+            case 'd'-> callMovement(-10, 0, inventoryManager, e.getKeyChar());
+            case 'w'-> callMovement(0, 10, inventoryManager, e.getKeyChar());
+            case 'e'-> inventoryManager.setVisibilityInventory(this.listGraphicalEntity);
+            case 'f'-> inventoryManager.playerSearchCollaborationEntity(this.listGraphicalEntity);
+            case '1', '2', '3', '4', '5', '6' -> tryToUseItemInInventory(inventoryManager, e.getKeyChar());
+            case 'q'-> inventoryManager.mineBlock(this.listGraphicalEntity);
         }
     }
 
