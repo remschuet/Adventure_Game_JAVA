@@ -102,19 +102,6 @@ public class ScreenManager extends JFrame implements KeyListener {
             }
             createNewBlock(physicalBlockName, posX, posY);
         }
-
-        /*
-
-                            switch (direction)
-                    {
-                        case LEFT : posX = 130; posY = 250; break;
-                        case RIGHT: posX = 370; posY = 250; break;
-                        case DOWN : posX = 250; posY = 370; break;
-                        case UP: {
-                            posX = 250;
-                            posY = 130;
-                        }break;
-         */
     }
 
     public void createNewBlock(String physicalBlock, int posX, int posY)
