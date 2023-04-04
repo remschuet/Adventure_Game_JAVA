@@ -53,18 +53,37 @@ public class ScreenManager extends JFrame implements KeyListener {
     {
         String physicalBlockName = inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
 
-        if (!physicalBlockName.equals(""))
-            createNewBlock(physicalBlockName);
+        if (!physicalBlockName.equals("")) {
+            int posX = 0;
+            int posY = 0;
+
+            for(GraphicalEntity cursor: this.listGraphicalEntity)
+            {
+                if (cursor instanceof TargetingCursor)
+                {
+                    Gameplay.DIRECTION direction = ((TargetingCursor)cursor).getDirection();
+                    switch (direction)
+                    {
+                        case LEFT : posX = 130; posY = 250; break;
+                        case RIGHT: posX = 370; posY = 250; break;
+                        case DOWN : posX = 250; posY = 370; break;
+                        case UP: posX = 250; posY = 130; break;
+                        // FIX ME
+                    }
+                }
+            }
+            createNewBlock(physicalBlockName, posX, posY);
+        }
     }
 
-    public void createNewBlock(String physicalBlock)
+    public void createNewBlock(String physicalBlock, int posX, int posY)
     {
         boolean blockActive = false;
 
         for (GraphicalEntity collidedEntity: this.listGraphicalEntity) {
 
             if (!(collidedEntity.getIfIsActive()) && collidedEntity.getImagePath().equals(physicalBlock)) {
-                collidedEntity.setLocation(160, 220);              // new Position
+                collidedEntity.setLocation(posX, posY);              // new Position
                 collidedEntity.setActive();                             // active
                 blockActive = true;
                 break;

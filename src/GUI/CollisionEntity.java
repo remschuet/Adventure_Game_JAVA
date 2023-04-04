@@ -12,7 +12,7 @@ public class CollisionEntity {
         for(GraphicalEntity object : listGraphicalEntity)
         {
             // Don't include Player and no physical object
-            if (object instanceof PhysicalEntity && !(object instanceof CollaborationEntity))
+            if (object instanceof PhysicalEntity && !(object instanceof CollaborationEntity) && object.getIfIsActive())
             {
                 Rectangle objectRect = object.getBounds();          // Rect of visibleObject
                 if (!object.equals(identity))                       // If != Player
@@ -29,7 +29,7 @@ public class CollisionEntity {
 
         for (GraphicalEntity object : listGraphicalEntity) {
             // Don't include Player and no physical object
-            if (object instanceof CollaborationEntity || object instanceof EnvironmentEntity) {
+            if (object instanceof CollaborationEntity || object instanceof EnvironmentEntity && object.getIfIsActive()) {
                 Rectangle objectRect = object.getBounds();          // Rect of visibleObject
                 if (!object.equals(entity))                       // If != Player
                     if (rectIdentity.intersects(objectRect))           // Collision
@@ -45,7 +45,7 @@ public class CollisionEntity {
         for(GraphicalEntity object : listGraphicalEntity)
         {
             // Include PhysicalEntity exclude CollaborationEntity Player
-            if (object instanceof PhysicalEntity && !(object instanceof CollaborationEntity) && !(object instanceof Player))
+            if (object instanceof PhysicalEntity && !(object instanceof CollaborationEntity) && !(object instanceof Player) && object.getIfIsActive())
             {
                 Rectangle objectRect = object.getBounds();          // Rect of visibleObject
                 if (!object.equals(identity))                           // If != Player

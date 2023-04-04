@@ -90,6 +90,8 @@ public class Inventory extends GraphicalEntity{
 
             displayItem();
         }
+        else
+            physicalBlock = "";
         return physicalBlock;
     }
 

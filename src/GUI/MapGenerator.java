@@ -17,8 +17,7 @@ public class MapGenerator {
         setWood();
         setBerry();
         createCase();
-
-        listGraphicalEntity.add(new Tree(60, 60, 120, 120, "Tree.png"));
+        createTree();
 
         listGraphicalEntity.add(new GraphicalEntity(0, 0, 1800, 1800, "Background.png"));
     }
@@ -95,5 +94,16 @@ public class MapGenerator {
                 else if (tab[x][y] != 0)
                     listGraphicalEntity.add(new PhysicalEntity(x * 60, y * 60, 60, 60, textureName));
             }
+    }
+
+    public void createTree()
+    {
+        listGraphicalEntity.add(new Tree(60, 60, 120, 120, "Tree.png"));
+        for(int i = 0; i < 5; i++)
+        {
+            Wood wood = new Wood(60, 60, 60, 60, "Wood.png", "WoodItem.png");
+            listGraphicalEntity.add(wood);
+            wood.setInactive();
+        }
     }
 }
