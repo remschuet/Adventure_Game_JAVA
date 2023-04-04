@@ -19,12 +19,16 @@ public class MovementEntity {
         this.player = player;
     }
 
-    public void moveEntity(int moveX, int moveY)
+    public boolean moveEntity(int moveX, int moveY)
     {
+        boolean canMove = true;
         for(GraphicalEntity entity : this.listGraphicalEntity)
             if (!(entity instanceof Player))
-                if (increasePos(entity, moveX, moveY))
+                if (increasePos(entity, moveX, moveY)) {
                     decreasePos(moveX, moveY);
+                    canMove = false;
+                }
+        return canMove;
     }
 
     public boolean increasePos(GraphicalEntity entity, int increaseX, int increaseY)

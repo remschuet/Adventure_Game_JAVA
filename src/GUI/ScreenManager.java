@@ -9,6 +9,8 @@ public class ScreenManager extends JFrame implements KeyListener {
     private final List<GraphicalEntity> listGraphicalEntity;
     private Player player;
     private MovementEntity movementEntity;
+    private int currentCenterX = 250 + 30;
+    private int currentCenterY = 250 + 30;
 
     ScreenManager(final int WIND_WIDTH, final int WIND_HEIGHT, List<GraphicalEntity> listGraphicalEntity, MovementEntity movementEntity)
     {
@@ -93,16 +95,32 @@ public class ScreenManager extends JFrame implements KeyListener {
             System.out.println("Create New Block not available for " + physicalBlock);
     }
 
+    public void callMovement(int moveX, int moveY, InventoryManager inventoryManager, char e)
+    {   // When player press w-a-s-d
+        if(movementEntity.moveEntity(moveX, moveY))
+        {
+            switch (e)
+            {
+                case 'w': this.currentCenterY -= moveY; break;
+                case 's': this.currentCenterY -= moveY; break;
+                case 'a': this.currentCenterX -= moveX; break;
+                case 'd': this.currentCenterX -= moveX; break;
+            }
+            System.out.println("PosX : " + this.currentCenterX + " PosY : " + this.currentCenterY);
+        }
+        setInventoryAndPlayer(inventoryManager, e);
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         InventoryManager inventoryManager = new InventoryManager();
 
         switch (e.getKeyChar())
         {
-            case 'a': movementEntity.moveEntity(10, 0);    setInventoryAndPlayer(inventoryManager, e.getKeyChar()); break;
-            case 's': movementEntity.moveEntity(0, -10);   setInventoryAndPlayer(inventoryManager, e.getKeyChar()); break;
-            case 'd': movementEntity.moveEntity(-10, 0);   setInventoryAndPlayer(inventoryManager, e.getKeyChar()); break;
-            case 'w': movementEntity.moveEntity(0, 10);    setInventoryAndPlayer(inventoryManager, e.getKeyChar()); break;
+            case 'a': callMovement(10, 0, inventoryManager, e.getKeyChar()); break;
+            case 's': callMovement(0, -10, inventoryManager, e.getKeyChar()); break;
+            case 'd': callMovement(-10, 0, inventoryManager, e.getKeyChar()); break;
+            case 'w': callMovement(0, 10, inventoryManager, e.getKeyChar()); break;
             case 'e': inventoryManager.setVisibilityInventory(this.listGraphicalEntity); break;
             case 'f': inventoryManager.playerSearchCollaborationEntity(this.listGraphicalEntity); break;
             case '1', '2', '3', '4', '5', '6' : tryToUseItemInInventory(inventoryManager, e.getKeyChar()); break;
