@@ -9,8 +9,6 @@ public class Animal extends CollaborationEntity {
     Animal(int posX, int posY, int width, int height, String path) {
         super(posX, posY, width, height, path);
 
-        this.inventoryItemName = "MeatItem.png";
-        this.usageDurability = 1;
     }
 
     public int getSpeed() {
@@ -48,17 +46,7 @@ public class Animal extends CollaborationEntity {
     }
 
     public void decreasePos(GraphicalEntity entity, int decreaseX, int decreaseY)
-    {/*
-       if (decreaseX > 0)
-        {
-            this.direction[1] = 0;
-            this.direction[0] = speed;
-        }
-        else
-        {
-            this.direction[0] = 0;
-            this.direction[1] = speed;
-        }*/
+    {
         entity.setLocation(entity.getX() - decreaseX, entity.getY() - decreaseY);
     }
 }

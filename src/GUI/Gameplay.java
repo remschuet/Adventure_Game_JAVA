@@ -8,6 +8,10 @@ public class Gameplay {
 
     private final int WIND_WIDTH = 600;
     private final int WIND_HEIGHT = 600;
+
+    private final int NB_CASE = 30;
+    private int[][] mapArray = new int[NB_CASE][NB_CASE];
+
     private List<GraphicalEntity> listGraphicalEntity = new ArrayList<>();
     public enum DIRECTION {DOWN, LEFT, UP, RIGHT};
 
@@ -25,7 +29,7 @@ public class Gameplay {
         this.listGraphicalEntity.add(targetingCursor);
 
         // Create player
-        Player player = new Player(0, 0, 60, 60, "Water.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
+        Player player = new Player(0, 0, 60, 60, "Player.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
         this.listGraphicalEntity.add(player);
         myFrame.setPlayer(player);
         movementEntity.setPlayer(player);
@@ -34,10 +38,14 @@ public class Gameplay {
         Inventory inventory = new Inventory(WIND_WIDTH / 2 - 120,WIND_HEIGHT / 2 - 120, 200, (int)(200 * 1.26), "Inventory.png");
         this.listGraphicalEntity.add(inventory);        // Set it visible
 
-        Animal pig = new Animal(180, 180, 60, 60, "Pig.png");
+        Pig pig = new Pig(180, 180, 60, 60, "Pig.png");
         listGraphicalEntity.add(pig);
 
-        MapGenerator map = new MapGenerator(this.listGraphicalEntity);
+        Wolf wolf = new Wolf(210, 630, 60, 60, "Pig.png");
+        listGraphicalEntity.add(wolf);
+
+
+        MapGenerator map = new MapGenerator(this.listGraphicalEntity, mapArray);
 
         // Add entity to screen
         for(GraphicalEntity entity : this.listGraphicalEntity)
