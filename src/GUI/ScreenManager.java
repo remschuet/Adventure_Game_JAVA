@@ -123,16 +123,20 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     public void callMovement(int moveX, int moveY, InventoryManager inventoryManager, char e)
     {   // When player press w-a-s-d
-        if(movementEntity.moveEntity(moveX, moveY))
+        if(movementEntity.movePigEntity(moveX, moveY))
         {
             switch (e)
             {
                 case 'w', 's'-> this.currentCenterY -= moveY;
                 case 'a', 'd'-> this.currentCenterX -= moveX;
             }
-            System.out.println("PosX : " + this.currentCenterX + " PosY : " + this.currentCenterY);
         }
         setInventoryAndPlayer(inventoryManager, e);
+    }
+
+    public void callEverySecond()
+    {
+        this.movementEntity.callEverySecond(currentCenterX, currentCenterY);
     }
 
     @Override

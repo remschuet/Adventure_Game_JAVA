@@ -11,6 +11,16 @@ public class Animal extends CollaborationEntity {
 
     }
 
+    public int getPosX()
+    {
+        return getX();
+    }
+
+    public int getPosY()
+    {
+        return this.posY;
+    }
+
     public int getSpeed() {
         return this.speed;
     }

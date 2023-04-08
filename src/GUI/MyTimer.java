@@ -5,10 +5,12 @@ import javax.swing.*;
 public class MyTimer {
 
     private final MovementEntity movementEntity;
+    private ScreenManager myFrame;
 
-    MyTimer(MovementEntity movementEntity)
+    MyTimer(MovementEntity movementEntity, ScreenManager myFrame)
     {
         this.movementEntity = movementEntity;
+        this.myFrame = myFrame;
 
         int delay = 1000;
         Timer timer = new Timer(delay, e -> callEverySecond());
@@ -17,6 +19,6 @@ public class MyTimer {
 
     private void callEverySecond()
     {
-        this.movementEntity.callEverySecond();
+        this.myFrame.callEverySecond();
     }
 }

@@ -6,8 +6,8 @@ import java.util.PriorityQueue;
 
 public class AStarAlgorithm {
 
-    static int ROW = 5;
-    static int COL = 5;
+    static int ROW = 30;
+    static int COL = 30;
 
     static class Node {
         int y, x, f, g, h;
@@ -75,7 +75,7 @@ public class AStarAlgorithm {
         return path;
     }
 
-
+/*
     public static void main(String[] args) {
         // initialisation de la grille
         int[][] grid = {
@@ -101,7 +101,7 @@ public class AStarAlgorithm {
                 System.out.println("(" + node.x + ", " + node.y + ")");
             }
         }
-    }
+    }*/
 
 
 }

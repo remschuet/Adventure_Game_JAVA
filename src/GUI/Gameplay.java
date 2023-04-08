@@ -18,7 +18,7 @@ public class Gameplay {
     public Gameplay()
     {
         // Create Move Entity
-        MovementEntity movementEntity = new MovementEntity(this.listGraphicalEntity);
+        MovementEntity movementEntity = new MovementEntity(this.listGraphicalEntity, mapArray);
 
         // Create Screen Manager
         ScreenManager myFrame = new ScreenManager(this.WIND_WIDTH, this.WIND_HEIGHT, this.listGraphicalEntity, movementEntity);
@@ -29,7 +29,7 @@ public class Gameplay {
         this.listGraphicalEntity.add(targetingCursor);
 
         // Create player
-        Player player = new Player(0, 0, 60, 60, "Player.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
+        Player player = new Player(0, 0, 60, 60, "Water.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
         this.listGraphicalEntity.add(player);
         myFrame.setPlayer(player);
         movementEntity.setPlayer(player);
@@ -41,7 +41,7 @@ public class Gameplay {
         Pig pig = new Pig(180, 180, 60, 60, "Pig.png");
         listGraphicalEntity.add(pig);
 
-        Wolf wolf = new Wolf(210, 630, 60, 60, "Pig.png");
+        Wolf wolf = new Wolf(180, 600, 60, 60, "Pig.png");
         listGraphicalEntity.add(wolf);
 
 
@@ -52,6 +52,6 @@ public class Gameplay {
             myFrame.add(entity);
 
         // Timer
-        MyTimer timer = new MyTimer(movementEntity);
+        MyTimer timer = new MyTimer(movementEntity, myFrame);
     }
 }

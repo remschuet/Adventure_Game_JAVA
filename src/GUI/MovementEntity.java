@@ -8,10 +8,17 @@ public class MovementEntity {
     private final List<GraphicalEntity> listGraphicalEntity;
     private Player player;
     private CollisionEntity collisionEntity = new CollisionEntity();
+    private final int[][] mapArray;
 
-    MovementEntity(List<GraphicalEntity> listGraphicalEntity)
+    public boolean wolfisCalcul = false;
+    public int valueWolf = 1;
+
+
+
+    MovementEntity(List<GraphicalEntity> listGraphicalEntity, int[][] mapArray)
     {
         this.listGraphicalEntity = listGraphicalEntity;
+        this.mapArray = mapArray;
     }
 
     public void setPlayer(Player player)
@@ -19,7 +26,7 @@ public class MovementEntity {
         this.player = player;
     }
 
-    public boolean moveEntity(int moveX, int moveY)
+    public boolean movePigEntity(int moveX, int moveY)
     {
         boolean canMove = true;
         for(GraphicalEntity entity : this.listGraphicalEntity)
@@ -44,23 +51,53 @@ public class MovementEntity {
                 entity.setLocation(entity.getX() - decreaseX, entity.getY() - decreaseY);
     }
 
-    public void callEverySecond()
+    public void callEverySecond(int currentCenterX, int currentCenterY)
     {
-        moveEntity();
+        moveAnimalEntity(currentCenterX, currentCenterY);
     }
 
-    public void moveEntity()
+    public void moveAnimalEntity(int currentCenterX, int currentCenterY)
     {
         for(GraphicalEntity entity : this.listGraphicalEntity)
         {
-            if(entity instanceof Animal)
+            if(entity instanceof Pig)
             {
-                moveEntity((Animal) entity);
+                movePigEntity((Animal) entity);
+            }
+            else if (entity instanceof Wolf)
+            {
+                moveWolfEntity((Wolf) entity, currentCenterX, currentCenterY);
             }
         }
     }
 
-    public void moveEntity(Animal animal)
+    public void moveWolfEntity(Wolf animal, int currentCenterX, int currentCenterY)
+    {
+
+        animal.createPath(mapArray, currentCenterX, currentCenterY);
+        animal.increasePos(animal,
+                (animal.path.get(this.valueWolf).y * 60 - animal.path.get(this.valueWolf - 1).y * 60),
+                (animal.path.get(this.valueWolf).x * 60 - animal.path.get(this.valueWolf - 1).x * 60));      // Increase
+        System.out.println((currentCenterX - 280) % 60);
+      //  System.out.println((animal.path.get(this.valueWolf - 1).x) + " first " + (animal.path.get(this.valueWolf - 1).y));
+      //  System.out.println((animal.path.get(this.valueWolf).x) + " second " + (animal.path.get(this.valueWolf).y));
+
+        /*
+        if (!this.wolfisCalcul) {
+            animal.createPath(mapArray, currentCenterX, currentCenterY);
+            this.wolfisCalcul = true;
+        }
+
+        if (animal.path.size() - 1 > valueWolf) {
+            this.valueWolf += 1;
+            animal.increasePos(animal, animal.path.get(this.valueWolf).y * 60 - animal.path.get(this.valueWolf - 1).y * 60, animal.path.get(this.valueWolf).x * 60 - animal.path.get(this.valueWolf - 1).x * 60);      // Increase
+            System.out.println((animal.getX()) + " - " + (animal.getY()));
+        }
+
+         */
+    }
+
+    public void movePigEntity(Animal animal)
     {
         int[] direction = new int[] {0, 0};              // x, y
 
