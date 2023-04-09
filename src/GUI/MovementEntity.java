@@ -7,13 +7,8 @@ public class MovementEntity {
 
     private final List<GraphicalEntity> listGraphicalEntity;
     private Player player;
-    private CollisionEntity collisionEntity = new CollisionEntity();
+    private final CollisionEntity collisionEntity = new CollisionEntity();
     private final int[][] mapArray;
-
-    public boolean wolfisCalcul = false;
-    public int valueWolf = 1;
-
-
 
     MovementEntity(List<GraphicalEntity> listGraphicalEntity, int[][] mapArray)
     {
@@ -71,30 +66,19 @@ public class MovementEntity {
         }
     }
 
-    public void moveWolfEntity(Wolf animal, int currentCenterX, int currentCenterY)
+    public void moveWolfEntity(Wolf wolf, int currentCenterX, int currentCenterY)
     {
+        wolf.updatePath(mapArray, currentCenterX, currentCenterY);
 
-        animal.createPath(mapArray, currentCenterX, currentCenterY);
-        animal.increasePos(animal,
-                (animal.path.get(this.valueWolf).y * 60 - animal.path.get(this.valueWolf - 1).y * 60),
-                (animal.path.get(this.valueWolf).x * 60 - animal.path.get(this.valueWolf - 1).x * 60));      // Increase
-        System.out.println((currentCenterX - 280) % 60);
-      //  System.out.println((animal.path.get(this.valueWolf - 1).x) + " first " + (animal.path.get(this.valueWolf - 1).y));
-      //  System.out.println((animal.path.get(this.valueWolf).x) + " second " + (animal.path.get(this.valueWolf).y));
-
-        /*
-        if (!this.wolfisCalcul) {
-            animal.createPath(mapArray, currentCenterX, currentCenterY);
-            this.wolfisCalcul = true;
+        if (wolf.path.size() > 1) {   // if animal not on objective
+            wolf.increasePos(wolf,
+                    (wolf.path.get(1).y * 60 - wolf.path.get(0).y * 60),
+                    (wolf.path.get(1).x * 60 - wolf.path.get(0).x * 60));
+            if (collisionEntity.checkCollisionAnimal(wolf, this.listGraphicalEntity)) // if collision
+                wolf.decreasePos(wolf,
+                        (wolf.path.get(1).y * 60 - wolf.path.get(0).y * 60),
+                        (wolf.path.get(1).x * 60 - wolf.path.get(0).x * 60));
         }
-
-        if (animal.path.size() - 1 > valueWolf) {
-            this.valueWolf += 1;
-            animal.increasePos(animal, animal.path.get(this.valueWolf).y * 60 - animal.path.get(this.valueWolf - 1).y * 60, animal.path.get(this.valueWolf).x * 60 - animal.path.get(this.valueWolf - 1).x * 60);      // Increase
-            System.out.println((animal.getX()) + " - " + (animal.getY()));
-        }
-
-         */
     }
 
     public void movePigEntity(Animal animal)

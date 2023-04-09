@@ -11,11 +11,13 @@ public class ScreenManager extends JFrame implements KeyListener {
     private MovementEntity movementEntity;
     private int currentCenterX = 250 + 30;
     private int currentCenterY = 250 + 30;
+    private int[][] mapArray;
 
-    ScreenManager(final int WIND_WIDTH, final int WIND_HEIGHT, List<GraphicalEntity> listGraphicalEntity, MovementEntity movementEntity)
+    ScreenManager(final int WIND_WIDTH, final int WIND_HEIGHT, List<GraphicalEntity> listGraphicalEntity, MovementEntity movementEntity, int[][] mapArray)
     {
         this.listGraphicalEntity = listGraphicalEntity;
         this.movementEntity = movementEntity;
+        this.mapArray = mapArray;
         // Create Move Entity
 
         this.setTitle("My GUI");
@@ -63,48 +65,54 @@ public class ScreenManager extends JFrame implements KeyListener {
             {
                 if (cursor instanceof TargetingCursor)
                 {
+                    int blocX = 0, blocY = 0;
                     Gameplay.DIRECTION direction = ((TargetingCursor)cursor).getDirection();
                     switch (direction)
                     {
                         case LEFT : {
-                            int blocX = (int) Math.floor((this.currentCenterX - 30) / 60);
-                            int blocY = Math.round(this.currentCenterY / 60) + 1;
+                            blocX = (int) Math.floor((this.currentCenterX - 30) / 60);
+                            blocY = Math.round(this.currentCenterY / 60) + 1;
                             System.out.println(blocX);
                             posY = blocY * 60 - (this.currentCenterY - 250 + 30);
                             posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+                            this.mapArray[blocX - 1][blocY - 1] = 1;
                         }
                         break;
                         case RIGHT: {
-                            int blocX = (int) Math.ceil((this.currentCenterX -30) / 60.0) + 2;
-                            int blocY = Math.round(this.currentCenterY / 60) + 1;
+                            blocX = (int) Math.ceil((this.currentCenterX -30) / 60.0) + 2;
+                            blocY = Math.round(this.currentCenterY / 60) + 1;
                             System.out.println(blocX);
                             posY = blocY * 60 - (this.currentCenterY - 250 + 30);
                             posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+                            this.mapArray[blocX - 1][blocY - 1] = 1;
                         } break;
                         case DOWN :
                         {
-                            int blocY = (int) Math.ceil((this.currentCenterY - 30) / 60.0) + 2;
-                            int blocX = Math.round(this.currentCenterX / 60);
+                            blocY = (int) Math.ceil((this.currentCenterY - 30) / 60.0) + 2;
+                            blocX = Math.round(this.currentCenterX / 60) + 1;
                             System.out.println(blocY);
                             posY = blocY * 60 - (this.currentCenterY - 250 + 30);
-                            posX = blocX * 60 - (this.currentCenterX - 250 + 30) + 60;
+                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+                            System.out.println("Screen =  X :" + blocX + " Y :" + blocY);
+                            this.mapArray[blocX - 1][blocY - 1] = 1;
                         }
                         break;
                         case UP: {
-                            int blocY = (int) Math.floor((this.currentCenterY - 30) / 60);
-                            int blocX = Math.round(this.currentCenterX / 60);
+                            blocY = (int) Math.floor((this.currentCenterY - 30) / 60);
+                            blocX = Math.round(this.currentCenterX / 60) + 1;
                             System.out.println(blocY);
                             posY = blocY * 60 - (this.currentCenterY - 250 + 30);
-                            posX = blocX * 60 - (this.currentCenterX - 250 + 30) + 60;
+                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+                            this.mapArray[blocX - 1][blocY - 1] = 1;
                         }break;
                     }
+                    createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
                 }
             }
-            createNewBlock(physicalBlockName, posX, posY);
         }
     }
 
-    public void createNewBlock(String physicalBlock, int posX, int posY)
+    public void createNewBlock(String physicalBlock, int posX, int posY, int blocX, int blocY)
     {
         boolean blockActive = false;
 
@@ -113,6 +121,9 @@ public class ScreenManager extends JFrame implements KeyListener {
             if (!(collidedEntity.getIfIsActive()) && collidedEntity.getImagePath().equals(physicalBlock)) {
                 collidedEntity.setLocation(posX, posY);              // new Position
                 collidedEntity.setActive();                             // active
+                collidedEntity.setPosXY(blocX * 60 - 60, blocY * 60 - 60);
+                System.out.println(posX + " new bloc " + posY);
+                System.out.println(blocX + " new bloc " + blocY);
                 blockActive = true;
                 break;
             }
@@ -152,7 +163,7 @@ public class ScreenManager extends JFrame implements KeyListener {
             case 'e'-> inventoryManager.setVisibilityInventory(this.listGraphicalEntity);
             case 'f'-> inventoryManager.playerSearchCollaborationEntity(this.listGraphicalEntity);
             case '1', '2', '3', '4', '5', '6' -> tryToUseItemInInventory(inventoryManager, e.getKeyChar());
-            case 'q'-> inventoryManager.mineBlock(this.listGraphicalEntity);
+            case 'q'-> inventoryManager.mineBlock(this.listGraphicalEntity, this.mapArray);
         }
     }
 

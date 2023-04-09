@@ -74,7 +74,7 @@ public class InventoryManager {
             }
     }
 
-    public void mineBlock(List<GraphicalEntity> listGraphicalEntity)
+    public void mineBlock(List<GraphicalEntity> listGraphicalEntity, int [][] mapArray)
     {   // Destroy EnvironmentEntity and add it to inventory
         List<GraphicalEntity> listEnvironmentEntity = new ArrayList<>();
         TargetingCursor targetingCursor = null;
@@ -94,6 +94,9 @@ public class InventoryManager {
             GraphicalEntity collidedEntity;
             if ((collidedEntity = collisionEntity.checkCollisionEntity(targetingCursor, listEnvironmentEntity)) != targetingCursor)
             {
+                System.out.println("remove bloc position : " + collidedEntity.posX + " : " + collidedEntity.posY);
+                mapArray[collidedEntity.posX / 60][collidedEntity.posY / 60] = 0;       // FIX ME
+                // System.out.println("take pose : " + collidedEntity.posX / 60);
                 ((Inventory) inventory).setNewItem(((EnvironmentEntity) collidedEntity).getItemNamePNG());
                 collidedEntity.setInactive();                           // inactive
             }

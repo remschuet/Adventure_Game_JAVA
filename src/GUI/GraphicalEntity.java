@@ -50,4 +50,11 @@ public class GraphicalEntity extends JLabel{
     {
         return this.imagePath;
     }
+
+    public void setPosXY(int posX, int posY)
+    {
+        this.posX = posX;
+        this.posY = posY;
+        System.out.println("New Pos X : " + this.posX + " Y : " + this.posY);
+    }
 }

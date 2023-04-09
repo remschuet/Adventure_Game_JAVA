@@ -95,10 +95,10 @@ public class MapGenerator {
                 else if (mapArray[x][y] != 0)
                     listGraphicalEntity.add(new PhysicalEntity(x * 60, y * 60, 60, 60, textureName));
 
-                if (this.mapArray[x][y] > 0)    // Create map with o and 1
+                if (this.mapArray[x][y] > 0 || this.mapArray[x][y] == -1)
                     this.mapArray[x][y] = 1;    // Can't move
                 else
-                    this.mapArray[x][y] = 0;    // Can move
+                    this.mapArray[x][y] = 0;    // Can't move
             }
     }
 
