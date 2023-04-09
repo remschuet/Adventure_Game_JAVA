@@ -76,8 +76,7 @@ public class ScreenManager extends JFrame implements KeyListener {
                             posY = blocY * 60 - (this.currentCenterY - 250 + 30);
                             posX = blocX * 60 - (this.currentCenterX - 250 + 30);
                             this.mapArray[blocX - 1][blocY - 1] = 1;
-                        }
-                        break;
+                        } break;
                         case RIGHT: {
                             blocX = (int) Math.ceil((this.currentCenterX -30) / 60.0) + 2;
                             blocY = Math.round(this.currentCenterY / 60) + 1;
@@ -95,8 +94,7 @@ public class ScreenManager extends JFrame implements KeyListener {
                             posX = blocX * 60 - (this.currentCenterX - 250 + 30);
                             System.out.println("Screen =  X :" + blocX + " Y :" + blocY);
                             this.mapArray[blocX - 1][blocY - 1] = 1;
-                        }
-                        break;
+                        } break;
                         case UP: {
                             blocY = (int) Math.floor((this.currentCenterY - 30) / 60);
                             blocX = Math.round(this.currentCenterX / 60) + 1;
@@ -104,7 +102,7 @@ public class ScreenManager extends JFrame implements KeyListener {
                             posY = blocY * 60 - (this.currentCenterY - 250 + 30);
                             posX = blocX * 60 - (this.currentCenterX - 250 + 30);
                             this.mapArray[blocX - 1][blocY - 1] = 1;
-                        }break;
+                        } break;
                     }
                     createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
                 }

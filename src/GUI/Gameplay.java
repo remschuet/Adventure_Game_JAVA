@@ -28,7 +28,7 @@ public class Gameplay {
         this.listGraphicalEntity.add(targetingCursor);
 
         // Create player
-        Player player = new Player(0, 0, 60, 60, "Water.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
+        Player player = new Player(0, 0, 60, 60, "Player.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
         this.listGraphicalEntity.add(player);
         myFrame.setPlayer(player);
         movementEntity.setPlayer(player);
@@ -41,7 +41,7 @@ public class Gameplay {
         Pig pig = new Pig(180, 180, 60, 60, "Pig.png");
         listGraphicalEntity.add(pig);
 
-        Wolf wolf = new Wolf(180, 600, 60, 60, "Pig.png");
+        Wolf wolf = new Wolf(180, 600, 60, 60, "Wolf.png");
         listGraphicalEntity.add(wolf);
 
         // Create map

@@ -70,7 +70,7 @@ public class MovementEntity {
     {
         wolf.updatePath(mapArray, currentCenterX, currentCenterY);
 
-        if (wolf.path.size() > 1) {   // if animal not on objective
+        if (wolf.path.size() > 1 && wolf.path.size() < 12) {   // if animal not on objective
             wolf.increasePos(wolf,
                     (wolf.path.get(1).y * 60 - wolf.path.get(0).y * 60),
                     (wolf.path.get(1).x * 60 - wolf.path.get(0).x * 60));
