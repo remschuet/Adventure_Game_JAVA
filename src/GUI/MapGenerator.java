@@ -7,8 +7,6 @@ public class MapGenerator {
     private final int NB_CASE = 30;
     private int[][] mapArray;
 
-
-
     MapGenerator(List<GraphicalEntity> listGraphicalEntity, int[][] mapArray, boolean isTesting)
     {
         this.listGraphicalEntity = listGraphicalEntity;

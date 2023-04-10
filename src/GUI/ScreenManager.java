@@ -55,59 +55,51 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     public void tryToUseItemInInventory(InventoryManager inventoryManager, char key)
     {
-        String physicalBlockName = inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
+        int posX;
+        int posY;
 
-        if (!physicalBlockName.equals("")) {
-            int posX = 0;
-            int posY = 0;
-
-            for(GraphicalEntity cursor: this.listGraphicalEntity)
+        for(GraphicalEntity cursor: this.listGraphicalEntity)
+        {
+            if (cursor instanceof TargetingCursor)
             {
-                if (cursor instanceof TargetingCursor)
+                int blocX = 0, blocY = 0;
+                Gameplay.DIRECTION direction = ((TargetingCursor)cursor).getDirection();
+                switch (direction)
                 {
-                    int blocX = 0, blocY = 0;
-                    Gameplay.DIRECTION direction = ((TargetingCursor)cursor).getDirection();
-                    switch (direction)
+                    case LEFT : {
+                        blocX = (int) Math.floor((this.currentCenterX - 30) / 60);
+                        blocY = Math.round(this.currentCenterY / 60) + 1;
+
+                    } break;
+                    case RIGHT: {
+                        blocX = (int) Math.ceil((this.currentCenterX -30) / 60.0) + 2;
+                        blocY = Math.round(this.currentCenterY / 60) + 1;
+                    } break;
+                    case DOWN :
                     {
-                        case LEFT : {
-                            blocX = (int) Math.floor((this.currentCenterX - 30) / 60);
-                            blocY = Math.round(this.currentCenterY / 60) + 1;
-                            System.out.println(blocX);
-                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
-                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+                        blocY = (int) Math.ceil((this.currentCenterY - 30) / 60.0) + 2;
+                        blocX = Math.round(this.currentCenterX / 60) + 1;
+                    } break;
+                    case UP: {
+                        blocY = (int) Math.floor((this.currentCenterY - 30) / 60);
+                        blocX = Math.round(this.currentCenterX / 60) + 1;
+                    } break;
+                }
+                if (this.mapArray[blocX - 1][blocY - 1] == 0) {
+                    posY = blocY * 60 - (this.currentCenterY - 250 + 30);
+                    posX = blocX * 60 - (this.currentCenterX - 250 + 30);
+
+                    String physicalBlockName = inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
+
+                        if (physicalBlockName != "") {
                             this.mapArray[blocX - 1][blocY - 1] = 1;
-                        } break;
-                        case RIGHT: {
-                            blocX = (int) Math.ceil((this.currentCenterX -30) / 60.0) + 2;
-                            blocY = Math.round(this.currentCenterY / 60) + 1;
-                            System.out.println(blocX);
-                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
-                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
-                            this.mapArray[blocX - 1][blocY - 1] = 1;
-                        } break;
-                        case DOWN :
-                        {
-                            blocY = (int) Math.ceil((this.currentCenterY - 30) / 60.0) + 2;
-                            blocX = Math.round(this.currentCenterX / 60) + 1;
-                            System.out.println(blocY);
-                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
-                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
-                            System.out.println("Screen =  X :" + blocX + " Y :" + blocY);
-                            this.mapArray[blocX - 1][blocY - 1] = 1;
-                        } break;
-                        case UP: {
-                            blocY = (int) Math.floor((this.currentCenterY - 30) / 60);
-                            blocX = Math.round(this.currentCenterX / 60) + 1;
-                            System.out.println(blocY);
-                            posY = blocY * 60 - (this.currentCenterY - 250 + 30);
-                            posX = blocX * 60 - (this.currentCenterX - 250 + 30);
-                            this.mapArray[blocX - 1][blocY - 1] = 1;
-                        } break;
-                    }
-                    createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
+                            createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
+                        }
                 }
             }
+            break;
         }
+
     }
 
     public void createNewBlock(String physicalBlock, int posX, int posY, int blocX, int blocY)

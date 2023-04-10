@@ -94,7 +94,6 @@ public class InventoryManager {
             GraphicalEntity collidedEntity;
             if ((collidedEntity = collisionEntity.checkCollisionEntity(targetingCursor, listEnvironmentEntity)) != targetingCursor)
             {
-                System.out.println("remove bloc position : " + collidedEntity.posX + " : " + collidedEntity.posY);
                 mapArray[collidedEntity.posX / 60][collidedEntity.posY / 60] = 0;       // FIX ME
                 // System.out.println("take pose : " + collidedEntity.posX / 60);
                 ((Inventory) inventory).setNewItem(((EnvironmentEntity) collidedEntity).getItemNamePNG());

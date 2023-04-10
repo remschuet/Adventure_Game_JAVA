@@ -24,7 +24,7 @@ public class GraphicalEntity extends JLabel{
 
         this.setIcon(loadImageRAM.imageMap.get(imagePath));
 
-        this.setBackground(Color.GRAY);
+        this.setBackground(Color.RED);
         this.setBounds(this.posX, this.posY, this.width, this.height);
         this.isActive = true;
     }

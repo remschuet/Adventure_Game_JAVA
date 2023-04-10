@@ -55,6 +55,7 @@ public class Gameplay {
         // Create map
         new MapGenerator(this.listGraphicalEntity, mapArray, isTesting);
 
+
         // Add entity to screen
         for(GraphicalEntity entity : this.listGraphicalEntity)
             myFrame.add(entity);
