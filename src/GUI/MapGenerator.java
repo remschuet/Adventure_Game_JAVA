@@ -22,7 +22,10 @@ public class MapGenerator {
         createCase();
         createTree(isTesting);
 
-        listGraphicalEntity.add(new GraphicalEntity(0, 0, 1800, 1800, "Background.png"));
+        listGraphicalEntity.add(new GraphicalEntity(-360, -360, 1800, 1800, "Background.png"));
+        listGraphicalEntity.add(new GraphicalEntity(-360, 1800 -420, 1800, 1800, "Background.png"));
+        listGraphicalEntity.add(new GraphicalEntity(1800 -420, -360, 1800, 1800, "Background.png"));
+        listGraphicalEntity.add(new GraphicalEntity(1800 -420, 1800 -420, 1800, 1800, "Background.png"));
     }
 
     private void initTheMap()
@@ -44,10 +47,24 @@ public class MapGenerator {
         this.mapArray[3][6] = 1;
         this.mapArray[2][6] = 1;
         this.mapArray[3][7] = 1;
+/*
+        this.mapArray[2][21] = 1;
+        this.mapArray[3][21] = 1;
+        this.mapArray[4][21] = 1;
+        this.mapArray[6][21] = 1;
+        this.mapArray[7][21] = 1;
+        this.mapArray[3][20] = 1;
+        this.mapArray[4][20] = 1;
+        this.mapArray[6][19] = 1;
+        this.mapArray[7][22] = 1;
+        this.mapArray[7][20] = 1;   */
     }
 
     private void setRock()
     {
+        //mapArray[2][26] = 4;
+        // mapArray[6][28] = 4;
+
         mapArray[5][1] = 2;
         mapArray[6][1] = 2;
     }
@@ -66,6 +83,10 @@ public class MapGenerator {
         mapArray[8][9] = 4;
         mapArray[9][9] = 4;
         mapArray[10][9] = 4;
+
+        mapArray[2][25] = 4;
+        mapArray[2][26] = 4;
+        mapArray[6][28] = 4;
     }
 
     private void createCase()
@@ -117,6 +138,13 @@ public class MapGenerator {
             displayTree(3, 12);
             displayTree(5, 12);
             displayTree(3, 14);
+
+            displayTree(2, 27);
+            displayTree(4, 27);
+            displayTree(7, 27);
+            displayTree(9, 27);
+            displayTree(3, 25);
+            displayTree(5, 25);
 
         }
     }

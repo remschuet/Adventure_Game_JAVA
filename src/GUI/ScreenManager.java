@@ -120,8 +120,6 @@ public class ScreenManager extends JFrame implements KeyListener {
                 collidedEntity.setLocation(posX, posY);              // new Position
                 collidedEntity.setActive();                             // active
                 collidedEntity.setPosXY(blocX * 60 - 60, blocY * 60 - 60);
-                System.out.println(posX + " new bloc " + posY);
-                System.out.println(blocX + " new bloc " + blocY);
                 blockActive = true;
                 break;
             }
