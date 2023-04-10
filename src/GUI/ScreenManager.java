@@ -160,7 +160,7 @@ public class ScreenManager extends JFrame implements KeyListener {
             case 'w'-> callMovement(0, 10, inventoryManager, e.getKeyChar());
             case 'e'-> inventoryManager.setVisibilityInventory(this.listGraphicalEntity);
             case 'f'-> inventoryManager.playerSearchCollaborationEntity(this.listGraphicalEntity);
-            case '1', '2', '3', '4', '5', '6' -> tryToUseItemInInventory(inventoryManager, e.getKeyChar());
+            case '0', '1', '2', '3', '4', '5', '6' -> tryToUseItemInInventory(inventoryManager, e.getKeyChar());
             case 'q'-> inventoryManager.mineBlock(this.listGraphicalEntity, this.mapArray);
         }
     }

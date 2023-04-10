@@ -9,7 +9,7 @@ public class MapGenerator {
 
 
 
-    MapGenerator(List<GraphicalEntity> listGraphicalEntity, int[][] mapArray)
+    MapGenerator(List<GraphicalEntity> listGraphicalEntity, int[][] mapArray, boolean isTesting)
     {
         this.listGraphicalEntity = listGraphicalEntity;
         this.mapArray = mapArray;
@@ -20,7 +20,7 @@ public class MapGenerator {
         setWood();
         setBerry();
         createCase();
-        createTree();
+        createTree(isTesting);
 
         listGraphicalEntity.add(new GraphicalEntity(0, 0, 1800, 1800, "Background.png"));
     }
@@ -102,14 +102,22 @@ public class MapGenerator {
             }
     }
 
-    public void createTree()
+    private void displayTree(int posX, int posY) {
+        listGraphicalEntity.add(new Tree(60 * posX, 60 * posY, 120, 120, "Tree.png"));
+        for (int i = 0; i < 5; i++) {
+            Wood wood1 = new Wood(60, 60, 60, 60, "Wood.png", "WoodItem.png");
+            listGraphicalEntity.add(wood1);
+            wood1.setInactive();
+        }
+    }
+    public void createTree(boolean isTesting)
     {
-        listGraphicalEntity.add(new Tree(60, 60, 120, 120, "Tree.png"));
-        for(int i = 0; i < 5; i++)
-        {
-            Wood wood = new Wood(60, 60, 60, 60, "Wood.png", "WoodItem.png");
-            listGraphicalEntity.add(wood);
-            wood.setInactive();
+        displayTree(1, 1);
+        if (!isTesting) {
+            displayTree(3, 12);
+            displayTree(5, 12);
+            displayTree(3, 14);
+
         }
     }
 }

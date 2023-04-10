@@ -70,10 +70,12 @@ public class Inventory extends GraphicalEntity{
     public String useItem(int numberCallByUser)
     {
         InventoryItem inventoryItem;
-        int index = numberCallByUser - 1;
+        int index = 0;
+        if (numberCallByUser > 0)
+             index = numberCallByUser - 1;
         String physicalBlock = "";
 
-        if (this.listInventoryItem.size() >= numberCallByUser) {
+        if (this.listInventoryItem.size() >= numberCallByUser && this.listInventoryItem.size() != 0) {
             hideItem();
             inventoryItem = this.listInventoryItem.get(index);
             physicalBlock = inventoryItem.getBlockType();

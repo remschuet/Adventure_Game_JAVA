@@ -30,7 +30,7 @@ public class InventoryManager {
     {   // use item of the inventory when user enter number 1 to 6
         GraphicalEntity inventory = getInventory(listGraphicalEntity);
         String physicalBlockName = "";
-        if(((Inventory) inventory).getVisibility())
+        if(((Inventory) inventory).getVisibility() || numberCallUser == '0')
             physicalBlockName = ((Inventory) inventory).useItem(Character.getNumericValue(numberCallUser));
 
         return physicalBlockName;

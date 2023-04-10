@@ -5,13 +5,16 @@ import java.util.List;
 
 public class Gameplay {
 
-    private static final int WIND_WIDTH = 600;
-    private static final int WIND_HEIGHT = 600;
-
     private final int NB_CASE = 30;
     private final int[][] mapArray = new int[NB_CASE][NB_CASE];
 
+    private final static int sizeCase = 60;
+    private final static boolean isTesting = false;
+    private static final int WIND_WIDTH = 600;
+    private static final int WIND_HEIGHT = 600;
+
     private List<GraphicalEntity> listGraphicalEntity = new ArrayList<>();
+
     public enum DIRECTION {DOWN, LEFT, UP, RIGHT};
 
     public Gameplay()
@@ -24,7 +27,7 @@ public class Gameplay {
         myFrame.setLayout(null);
 
         TargetingCursor targetingCursor = new TargetingCursor
-                (240, 240, 20, 20, "TargetingCursor.png", DIRECTION.UP, WIND_WIDTH, WIND_HEIGHT);
+                (240, 240, 20, 20, "", DIRECTION.UP, WIND_WIDTH, WIND_HEIGHT); // TargetingCursor.png
         this.listGraphicalEntity.add(targetingCursor);
 
         // Create player
@@ -38,14 +41,19 @@ public class Gameplay {
         this.listGraphicalEntity.add(inventory);
 
         // Create Animal
-        Pig pig = new Pig(180, 180, 60, 60, "Pig.png");
-        listGraphicalEntity.add(pig);
+        listGraphicalEntity.add(new Pig(sizeCase * 2, sizeCase * 2, sizeCase, sizeCase, "Pig.png"));
+        // listGraphicalEntity.add(new Wolf(sizeCase * 2, sizeCase * 10, sizeCase, sizeCase, "Wolf.png"));
 
-        Wolf wolf = new Wolf(180, 600, 60, 60, "Wolf.png");
-        listGraphicalEntity.add(wolf);
+        if (!isTesting) {
+            listGraphicalEntity.add(new Pig(sizeCase * 4, sizeCase * 20, sizeCase, sizeCase, "Pig.png"));
+            listGraphicalEntity.add(new Pig(sizeCase * 10, sizeCase * 7, sizeCase, sizeCase, "Pig.png"));
+            listGraphicalEntity.add(new Pig(sizeCase * 8, sizeCase * 10, sizeCase, sizeCase, "Pig.png"));
 
+            listGraphicalEntity.add(new Wolf(sizeCase * 2, sizeCase * 22, sizeCase, sizeCase, "Wolf.png"));
+            listGraphicalEntity.add(new Wolf(sizeCase * 28, sizeCase * 22, sizeCase, sizeCase, "Wolf.png"));
+        }
         // Create map
-        new MapGenerator(this.listGraphicalEntity, mapArray);
+        new MapGenerator(this.listGraphicalEntity, mapArray, isTesting);
 
         // Add entity to screen
         for(GraphicalEntity entity : this.listGraphicalEntity)
