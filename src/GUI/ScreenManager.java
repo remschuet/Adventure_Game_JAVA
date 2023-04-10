@@ -91,10 +91,10 @@ public class ScreenManager extends JFrame implements KeyListener {
 
                     String physicalBlockName = inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
 
-                        if (physicalBlockName != "") {
-                            this.mapArray[blocX - 1][blocY - 1] = 1;
-                            createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
-                        }
+                    if (physicalBlockName != "") {
+                        this.mapArray[blocX - 1][blocY - 1] = 1;
+                        createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
+                    }
                 }
             }
             break;
