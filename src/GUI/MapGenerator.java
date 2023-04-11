@@ -5,7 +5,7 @@ import java.util.List;
 public class MapGenerator {
     private final List<GraphicalEntity> listGraphicalEntity;
     private final int NB_CASE = 30;
-    private int[][] mapArray;
+    private final int[][] mapArray;
 
     MapGenerator(List<GraphicalEntity> listGraphicalEntity, int[][] mapArray, boolean isTesting)
     {
@@ -45,24 +45,10 @@ public class MapGenerator {
         this.mapArray[3][6] = 1;
         this.mapArray[2][6] = 1;
         this.mapArray[3][7] = 1;
-/*
-        this.mapArray[2][21] = 1;
-        this.mapArray[3][21] = 1;
-        this.mapArray[4][21] = 1;
-        this.mapArray[6][21] = 1;
-        this.mapArray[7][21] = 1;
-        this.mapArray[3][20] = 1;
-        this.mapArray[4][20] = 1;
-        this.mapArray[6][19] = 1;
-        this.mapArray[7][22] = 1;
-        this.mapArray[7][20] = 1;   */
     }
 
     private void setRock()
     {
-        //mapArray[2][26] = 4;
-        // mapArray[6][28] = 4;
-
         mapArray[5][1] = 2;
         mapArray[6][1] = 2;
     }
@@ -92,14 +78,13 @@ public class MapGenerator {
         for (int x = 0; x < this.NB_CASE; x++)
             for (int y = 0; y < this.NB_CASE; y++)
             {
-                String textureName = "Grass.png";       // for -1
-                switch (mapArray[x][y])
-                {
-                    case 1: textureName = "Water.png"; break;
-                    case 2: textureName = "Rock.png"; break;
-                    case 3: textureName = "Wood.png"; break;
-                    case 4: textureName = "Berry.png"; break;
-                }
+                String textureName = switch (mapArray[x][y]) {
+                    case 1 -> "Water.png";
+                    case 2 -> "Rock.png";
+                    case 3 -> "Wood.png";
+                    case 4 -> "Berry.png";
+                    default -> "Grass.png";
+                };
 
                 if (mapArray[x][y] == - 1)
                     listGraphicalEntity.add(new PhysicalEntity(x * 60, y * 60, 60, 60, textureName));
