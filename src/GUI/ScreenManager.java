@@ -138,6 +138,14 @@ public class ScreenManager extends JFrame implements KeyListener {
         this.movementEntity.callEverySecond(currentCenterX, currentCenterY);
     }
 
+    public void callShoot()
+    {
+        System.out.println("Bullet Shoot");
+        Bullet bullet = new Bullet(60, 60, 60, 60, "Water.png");
+        this.listGraphicalEntity.add(10, bullet);       // FIX ME
+        this.add(bullet, 0);
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         InventoryManager inventoryManager = new InventoryManager();
@@ -152,6 +160,7 @@ public class ScreenManager extends JFrame implements KeyListener {
             case 'f'-> inventoryManager.playerSearchCollaborationEntity(this.listGraphicalEntity);
             case '0', '1', '2', '3', '4', '5', '6' -> tryToUseItemInInventory(inventoryManager, e.getKeyChar());
             case 'q'-> inventoryManager.mineBlock(this.listGraphicalEntity, this.mapArray);
+            case 'x' -> callShoot();
         }
     }
 
