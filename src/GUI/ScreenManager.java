@@ -6,6 +6,9 @@ import java.util.List;
 
 public class ScreenManager extends JFrame implements KeyListener {
 
+    private final int WIND_WIDTH;
+    private final int WIND_HEIGHT;
+
     private final List<GraphicalEntity> listGraphicalEntity;
     private final MovementEntity movementEntity;
     private int currentCenterX = 250 + 30;
@@ -14,6 +17,8 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     ScreenManager(final int WIND_WIDTH, final int WIND_HEIGHT, List<GraphicalEntity> listGraphicalEntity, MovementEntity movementEntity, int[][] mapArray)
     {
+        this.WIND_WIDTH = WIND_WIDTH;
+        this.WIND_HEIGHT = WIND_HEIGHT;
         this.listGraphicalEntity = listGraphicalEntity;
         this.movementEntity = movementEntity;
         this.mapArray = mapArray;
@@ -136,10 +141,18 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     public void callShoot()
     {
-        System.out.println("Bullet Shoot");
-        Bullet bullet = new Bullet(60, 60, 60, 60, "Water.png", Gameplay.DIRECTION.DOWN);
-        this.listGraphicalEntity.add(10, bullet);       // FIX ME
-        this.add(bullet, 0);
+        for(GraphicalEntity player: this.listGraphicalEntity)
+
+            if (player instanceof Player) {
+                Gameplay.DIRECTION direction = ((Player)player).getDirection();
+
+                // GET POSITION from player.Cursor.getPosXY ou player pour des collisions
+                System.out.println("Bullet Shoot");
+                Bullet bullet = new Bullet(this.WIND_WIDTH / 2 - 25, this.WIND_HEIGHT / 2 - 25, 20, 20, "TargetingCursor.png", direction);
+                this.listGraphicalEntity.add(10, bullet);       // FIX ME
+                this.add(bullet, 0);
+                break;
+            }
     }
 
     @Override

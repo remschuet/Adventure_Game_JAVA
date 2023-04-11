@@ -63,8 +63,8 @@ public class CollisionEntity {
         Rectangle rectIdentity = identity.getBounds();                 // Rect of Player
         for(GraphicalEntity object : listGraphicalEntity)
         {
-            // Include PhysicalEntity exclude Player
-            if (object instanceof PhysicalEntity && !(object instanceof Player) && object.getIfIsActive())
+            // Include PhysicalEntity exclude Player, Targeting Cursor
+            if (object instanceof PhysicalEntity && !(object instanceof Player) && !(object instanceof TargetingCursor) && object.getIfIsActive())
             {
                 Rectangle objectRect = object.getBounds();          // Rect of visibleObject
                 if (!object.equals(identity))                           // If != Player

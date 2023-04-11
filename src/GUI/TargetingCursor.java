@@ -28,8 +28,6 @@ public class TargetingCursor extends CollaborationEntity{
             case RIGHT : posX = this.WIND_WIDTH / 2 + 30; posY = this.WIND_HEIGHT / 2 - 30; break;
         }
         this.setLocation(posX, posY);
-
-
     }
 
     public Gameplay.DIRECTION getDirection()
