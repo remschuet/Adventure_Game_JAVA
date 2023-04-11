@@ -44,8 +44,27 @@ public class CollisionEntity {
         Rectangle rectIdentity = identity.getBounds();                 // Rect of Player
         for(GraphicalEntity object : listGraphicalEntity)
         {
-            // Include PhysicalEntity exclude CollaborationEntity Player
+            // Include PhysicalEntity exclude CollaborationEntity and Player
             if (object instanceof PhysicalEntity && !(object instanceof CollaborationEntity) && !(object instanceof Player) && object.getIfIsActive())
+            {
+                Rectangle objectRect = object.getBounds();          // Rect of visibleObject
+                if (!object.equals(identity))                           // If != Player
+                    if (rectIdentity.intersects(objectRect))           // Collision
+                    {
+                        return true;
+                    }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkCollisionBullet(GraphicalEntity identity, List<GraphicalEntity> listGraphicalEntity)
+    {
+        Rectangle rectIdentity = identity.getBounds();                 // Rect of Player
+        for(GraphicalEntity object : listGraphicalEntity)
+        {
+            // Include PhysicalEntity exclude Player
+            if (object instanceof PhysicalEntity && !(object instanceof Player) && object.getIfIsActive())
             {
                 Rectangle objectRect = object.getBounds();          // Rect of visibleObject
                 if (!object.equals(identity))                           // If != Player

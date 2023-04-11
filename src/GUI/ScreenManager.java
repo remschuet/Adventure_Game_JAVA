@@ -129,10 +129,15 @@ public class ScreenManager extends JFrame implements KeyListener {
         this.movementEntity.callEverySecond(currentCenterX, currentCenterY);
     }
 
+    public void callEvery200()
+    {
+        this.movementEntity.callEvery200(currentCenterX, currentCenterY);
+    }
+
     public void callShoot()
     {
         System.out.println("Bullet Shoot");
-        Bullet bullet = new Bullet(60, 60, 60, 60, "Water.png");
+        Bullet bullet = new Bullet(60, 60, 60, 60, "Water.png", Gameplay.DIRECTION.DOWN);
         this.listGraphicalEntity.add(10, bullet);       // FIX ME
         this.add(bullet, 0);
     }

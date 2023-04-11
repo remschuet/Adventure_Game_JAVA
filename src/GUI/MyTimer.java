@@ -5,18 +5,28 @@ import javax.swing.*;
 public class MyTimer {
 
     private ScreenManager myFrame;
+    private final static int DELAY1 = 1000;
+    private final static int DELAY2 = 200;
 
     MyTimer(ScreenManager myFrame)
     {
         this.myFrame = myFrame;
 
-        int delay = 1000;
-        Timer timer = new Timer(delay, e -> callEverySecond());
-        timer.start();
+        Timer timerMovement = new Timer(DELAY1, e -> callEverySecond());
+        timerMovement.start();
+
+        Timer timerBullet = new Timer(DELAY2, e -> callEvery200());
+        timerBullet.start();
     }
+
 
     private void callEverySecond()
     {
         this.myFrame.callEverySecond();
+    }
+
+    private void callEvery200()
+    {
+        this.myFrame.callEvery200();
     }
 }

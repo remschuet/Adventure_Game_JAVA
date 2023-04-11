@@ -48,10 +48,16 @@ public class MovementEntity {
 
     public void callEverySecond(int currentCenterX, int currentCenterY)
     {
-        moveAnimalEntity(currentCenterX, currentCenterY);
+        moveAnimalAndBulletEntity(currentCenterX, currentCenterY);
     }
 
-    public void moveAnimalEntity(int currentCenterX, int currentCenterY)
+    public void callEvery200(int currentCenterX, int currentCenterY) {
+        for (GraphicalEntity entity : this.listGraphicalEntity)
+            if (entity instanceof Bullet)
+                moveBulletEntity((Bullet) entity, currentCenterX, currentCenterY);
+    }
+
+    public void moveAnimalAndBulletEntity(int currentCenterX, int currentCenterY)
     {
         for(GraphicalEntity entity : this.listGraphicalEntity)
         {
@@ -64,6 +70,29 @@ public class MovementEntity {
                 moveWolfEntity((Wolf) entity, currentCenterX, currentCenterY);
             }
         }
+    }
+
+    public void moveBulletEntity(Bullet bullet, int currentCenterX, int currentCenterY)
+    {
+        Gameplay.DIRECTION direction = bullet.getDirection();
+
+        int directionXY[] = {0, 0};
+
+        int speed = bullet.getSpeed();
+
+        switch (direction)
+        {
+            case LEFT-> directionXY[0] = -speed;
+            case RIGHT-> directionXY[0] = speed;
+            case UP-> directionXY[1] = -speed;
+            case DOWN-> directionXY[1] = speed;
+        }
+
+        bullet.increasePos(bullet, directionXY[0], directionXY[1]);
+
+        if (collisionEntity.checkCollisionBullet(bullet, this.listGraphicalEntity))
+            bullet.decreasePos(bullet, directionXY[0], directionXY[1]);
+
     }
 
     public void moveWolfEntity(Wolf wolf, int currentCenterX, int currentCenterY)
