@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Inventory extends GraphicalEntity{
 
-    private List<InventoryItem> listInventoryItem = new ArrayList<>();
+    private final List<InventoryItem> listInventoryItem = new ArrayList<>();
     private boolean isVisible = false;
 
     Inventory(int posX, int posY, int width, int height, String imagePath)
@@ -17,13 +17,12 @@ public class Inventory extends GraphicalEntity{
     public int[] getPosItem(int nbrItem)
     {
         int[] position = {25, 35};
-        switch (nbrItem)
-        {
-            case 1: position[0] = 120; break;
-            case 2: position[1] = 110; break;
-            case 3: position[0] = 120; position[1] = 110; break;
-            case 4: position[1] = 182; break;
-            case 5: position[0] = 120; position[1] = 182; break;
+        switch (nbrItem) {
+            case 1 -> position[0] = 120;
+            case 2 -> position[1] = 110;
+            case 3 -> { position[0] = 120; position[1] = 110; }
+            case 4 -> position[1] = 182;
+            case 5 -> { position[0] = 120; position[1] = 182; }
         }
         return position;
     }

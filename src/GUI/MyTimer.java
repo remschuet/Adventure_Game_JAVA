@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class MyTimer {
 
-    private ScreenManager myFrame;
+    private final ScreenManager myFrame;
     private final static int DELAY1 = 1000;
     private final static int DELAY2 = 50;
 

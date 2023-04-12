@@ -51,7 +51,7 @@ public class MovementEntity {
         moveAnimalAndBulletEntity(currentCenterX, currentCenterY);
     }
 
-    public void callEvery200(int currentCenterX, int currentCenterY) {
+    public void callEvery200() {
         for (GraphicalEntity entity : this.listGraphicalEntity)
             if (entity instanceof Bullet && entity.getIfIsActive())
                 moveBulletEntity((Bullet) entity);

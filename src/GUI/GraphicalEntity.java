@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class GraphicalEntity extends JLabel{
 
-    private static LoadImageRAM loadImageRAM = new LoadImageRAM();
+    private static final LoadImageRAM loadImageRAM = new LoadImageRAM();
 
     protected int posX;
     protected int posY;

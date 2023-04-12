@@ -2,7 +2,6 @@ package GUI;
 
 public class InventoryItem extends GraphicalEntity{
 
-    private boolean isVisible = false;
     private final String blockType;
 
     InventoryItem(int posX, int posY, int width, int height, String path, String blockType)
@@ -14,13 +13,11 @@ public class InventoryItem extends GraphicalEntity{
 
     public void setInvisible()
     {
-        this.isVisible = false;
         setVisible(false);
     }
 
     public void setVisible()
     {
-        this.isVisible = true;
         setVisible(true);
     }
 

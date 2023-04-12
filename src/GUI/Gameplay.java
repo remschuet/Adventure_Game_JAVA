@@ -5,39 +5,39 @@ import java.util.List;
 
 public class Gameplay {
 
-    private final int NB_CASE = 30;
-    private final int[][] mapArray = new int[NB_CASE][NB_CASE];
-
-    private final static int sizeCase = 60;
     private final static boolean isTesting = false;
-    private static final int WIND_WIDTH = 600;
-    private static final int WIND_HEIGHT = 600;
+    private final static int NB_CASE = 30;
+    private final static int sizeCase = 60;
+    private final static int WIND_WIDTH = 600;
+    private final static int WIND_HEIGHT = 600;
 
-    private List<GraphicalEntity> listGraphicalEntity = new ArrayList<>();
-
-    public enum DIRECTION {DOWN, LEFT, UP, RIGHT};
+    public enum DIRECTION {DOWN, LEFT, UP, RIGHT}
 
     public Gameplay()
     {
+        int[][] mapArray = new int[NB_CASE][NB_CASE];
+        List<GraphicalEntity> listGraphicalEntity = new ArrayList<>();
+
+
         // Create Move Entity
-        MovementEntity movementEntity = new MovementEntity(this.listGraphicalEntity, mapArray);
+        MovementEntity movementEntity = new MovementEntity(listGraphicalEntity, mapArray);
 
         // Create Screen Manager
-        ScreenManager myFrame = new ScreenManager(WIND_WIDTH, WIND_HEIGHT, this.listGraphicalEntity, movementEntity, mapArray);
+        ScreenManager myFrame = new ScreenManager(WIND_WIDTH, WIND_HEIGHT, listGraphicalEntity, movementEntity, mapArray);
         myFrame.setLayout(null);
 
         TargetingCursor targetingCursor = new TargetingCursor
                 (240, 240, 20, 20, "", DIRECTION.UP, WIND_WIDTH, WIND_HEIGHT); // TargetingCursor.png
-        this.listGraphicalEntity.add(targetingCursor);
+        listGraphicalEntity.add(targetingCursor);
 
         // Create player
         Player player = new Player(0, 0, 60, 60, "Player.png", WIND_WIDTH, WIND_HEIGHT, targetingCursor);
-        this.listGraphicalEntity.add(player);
+        listGraphicalEntity.add(player);
         movementEntity.setPlayer(player);
 
         // Create inventory
         Inventory inventory = new Inventory(WIND_WIDTH / 2 - 120,WIND_HEIGHT / 2 - 120, 200, (int)(200 * 1.26), "Inventory.png");
-        this.listGraphicalEntity.add(inventory);
+        listGraphicalEntity.add(inventory);
 
         // Create Animal
         listGraphicalEntity.add(new Pig(sizeCase * 2, sizeCase * 2, sizeCase, sizeCase, "Pig.png"));
@@ -52,11 +52,11 @@ public class Gameplay {
             listGraphicalEntity.add(new Wolf(sizeCase * 28, sizeCase * 22, sizeCase, sizeCase, "Wolf.png"));
         }
         // Create map
-        new MapGenerator(this.listGraphicalEntity, mapArray, isTesting);
+        new MapGenerator(listGraphicalEntity, mapArray, isTesting);
 
 
         // Add entity to screen
-        for(GraphicalEntity entity : this.listGraphicalEntity)
+        for(GraphicalEntity entity : listGraphicalEntity)
             myFrame.add(entity);
 
         // Timer

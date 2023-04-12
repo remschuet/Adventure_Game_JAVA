@@ -136,7 +136,7 @@ public class ScreenManager extends JFrame implements KeyListener {
 
     public void callEvery200()
     {
-        this.movementEntity.callEvery200(currentCenterX, currentCenterY);
+        this.movementEntity.callEvery200();
     }
 
     public void callShoot()

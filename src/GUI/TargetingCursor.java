@@ -3,8 +3,8 @@ package GUI;
 public class TargetingCursor extends CollaborationEntity{
 
     private Gameplay.DIRECTION direction;
-    private int WIND_WIDTH;
-    private int WIND_HEIGHT;
+    private final int WIND_WIDTH;
+    private final int WIND_HEIGHT;
 
     TargetingCursor(int posX, int posY, int width, int height, String imagePath, Gameplay.DIRECTION direction, int WIND_WIDTH, int WIND_HEIGHT)
     {
@@ -22,10 +22,10 @@ public class TargetingCursor extends CollaborationEntity{
 
         switch (direction)
         {
-            case UP : posX = this.WIND_WIDTH / 2 - 30; posY = this.WIND_HEIGHT / 2 - 90; break;
-            case DOWN : posX = this.WIND_WIDTH / 2 - 30; posY = this.WIND_HEIGHT / 2 + 30; break;
-            case LEFT : posX = this.WIND_WIDTH / 2 - 90; posY = this.WIND_HEIGHT / 2 - 30; break;
-            case RIGHT : posX = this.WIND_WIDTH / 2 + 30; posY = this.WIND_HEIGHT / 2 - 30; break;
+            case UP     ->  {posX = this.WIND_WIDTH / 2 - 30; posY = this.WIND_HEIGHT / 2 - 90;}
+            case DOWN   ->  {posX = this.WIND_WIDTH / 2 - 30; posY = this.WIND_HEIGHT / 2 + 30;}
+            case LEFT   ->  {posX = this.WIND_WIDTH / 2 - 90; posY = this.WIND_HEIGHT / 2 - 30;}
+            case RIGHT  ->  {posX = this.WIND_WIDTH / 2 + 30; posY = this.WIND_HEIGHT / 2 - 30;}
         }
         this.setLocation(posX, posY);
     }

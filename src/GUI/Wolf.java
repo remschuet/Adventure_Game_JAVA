@@ -15,14 +15,13 @@ public class Wolf extends Animal{
 
     public void updatePath(int[][] mapArray, int currentCenterX, int currentCenterY)
     {
-        AStarAlgorithm starAlgorithm = new AStarAlgorithm();
         // initialisation des noeuds de départ et d'arrivée
         AStarAlgorithm.Node src = new AStarAlgorithm.Node(
-                (int)(this.getX() + (currentCenterX - 280)) / 60,
-                (int)(this.getY() + (currentCenterY - 280)) / 60, 0, 0, 0);
+                (this.getX() + (currentCenterX - 280)) / 60,
+                (this.getY() + (currentCenterY - 280)) / 60, 0, 0, 0);
         AStarAlgorithm.Node dest = new AStarAlgorithm.Node(
-                (int)(currentCenterX / 60), (int)(currentCenterY / 60), 0, 0, 0);
+                (currentCenterX / 60), (currentCenterY / 60), 0, 0, 0);
 
-        this.path = starAlgorithm.aStarSearch(mapArray, src, dest);
+        this.path = AStarAlgorithm.aStarSearch(mapArray, src, dest);
     }
 }

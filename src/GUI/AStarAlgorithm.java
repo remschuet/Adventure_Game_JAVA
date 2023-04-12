@@ -23,8 +23,8 @@ public class AStarAlgorithm {
     }
 
     // static int ROW, COL;
-    static int dx[] = {-1, 0, 1, 0};
-    static int dy[] = {0, 1, 0, -1};
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, 1, 0, -1};
 
     static boolean isValid(int row, int col, int[][] grid, boolean[][] visited) {
         return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL) && (grid[row][col] == 0 && !visited[row][col]);
@@ -74,34 +74,4 @@ public class AStarAlgorithm {
         System.out.println("Path not found");
         return path;
     }
-
-/*
-    public static void main(String[] args) {
-        // initialisation de la grille
-        int[][] grid = {
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 1, 0}};
-
-        // initialisation des noeuds de départ et d'arrivée
-        Node src = new Node(0, 0, 0, 0, 0);
-        Node dest = new Node(4, 4, 0, 0, 0);
-
-        // appel à l'algorithme A* pour trouver le chemin
-        List<Node> path = aStarSearch(grid, src, dest);
-
-        // affichage du chemin trouvé
-        if (path.isEmpty()) {
-            System.out.println("Chemin non trouvé !");
-        } else {
-            System.out.println("Chemin trouvé :");
-            for (Node node : path) {
-                System.out.println("(" + node.x + ", " + node.y + ")");
-            }
-        }
-    }*/
-
-
 }

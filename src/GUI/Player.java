@@ -2,9 +2,9 @@ package GUI;
 
 public class Player extends PhysicalEntity {
 
-    private int WIND_WIDTH;
-    private int WIND_HEIGHT;
-    private TargetingCursor targetingCursor;
+    private final int WIND_WIDTH;
+    private final int WIND_HEIGHT;
+    private final TargetingCursor targetingCursor;
     private Gameplay.DIRECTION direction;
 
     Player(int posX, int posY, int width, int height, String path, final int WIND_WIDTH, final int WIND_HEIGHT, TargetingCursor targetingCursor)
@@ -32,10 +32,5 @@ public class Player extends PhysicalEntity {
     public Gameplay.DIRECTION getDirection()
     {
         return this.direction;
-    }
-
-    public TargetingCursor getTargetingCursor()
-    {
-        return this.targetingCursor;
     }
 }

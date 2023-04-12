@@ -13,6 +13,7 @@ public class LoadImageRAM {
         File folder = new File("C:\\Users\\remsc\\OneDrive\\Documents\\Java Project\\FirstGui\\image");
         File[] files = folder.listFiles();
 
+        assert files != null;
         for (File file : files) {
             String fileName = file.getName();
             if (file.isFile() && fileName.endsWith(".png")) {

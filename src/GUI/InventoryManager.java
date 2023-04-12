@@ -56,7 +56,7 @@ public class InventoryManager {
                 CollisionEntity collisionForPlayer = new CollisionEntity();         // class Collision
                 // check collision
                 GraphicalEntity EntityCollision = collisionForPlayer.checkCollisionEntity
-                        ((PhysicalEntity) entity, listCollaborativeEntity);
+                        (entity, listCollaborativeEntity);
                 if (!EntityCollision.equals(entity))
                 {
                     GraphicalEntity inventory = getInventory(listGraphicalEntity);
@@ -96,7 +96,8 @@ public class InventoryManager {
             {
                 mapArray[collidedEntity.posX / 60][collidedEntity.posY / 60] = 0;       // FIX ME
                 // System.out.println("take pose : " + collidedEntity.posX / 60);
-                ((Inventory) inventory).setNewItem(((EnvironmentEntity) collidedEntity).getItemNamePNG());
+                assert inventory != null;
+                inventory.setNewItem(((EnvironmentEntity) collidedEntity).getItemNamePNG());
                 collidedEntity.setInactive();                           // inactive
             }
         }
