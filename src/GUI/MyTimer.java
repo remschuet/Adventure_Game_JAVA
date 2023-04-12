@@ -6,7 +6,7 @@ public class MyTimer {
 
     private ScreenManager myFrame;
     private final static int DELAY1 = 1000;
-    private final static int DELAY2 = 200;
+    private final static int DELAY2 = 50;
 
     MyTimer(ScreenManager myFrame)
     {
@@ -15,7 +15,7 @@ public class MyTimer {
         Timer timerMovement = new Timer(DELAY1, e -> callEverySecond());
         timerMovement.start();
 
-        Timer timerBullet = new Timer(DELAY2, e -> callEvery200());
+        Timer timerBullet = new Timer(DELAY2, e -> callEvery100());
         timerBullet.start();
     }
 
@@ -25,7 +25,7 @@ public class MyTimer {
         this.myFrame.callEverySecond();
     }
 
-    private void callEvery200()
+    private void callEvery100()
     {
         this.myFrame.callEvery200();
     }

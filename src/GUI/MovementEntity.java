@@ -53,31 +53,30 @@ public class MovementEntity {
 
     public void callEvery200(int currentCenterX, int currentCenterY) {
         for (GraphicalEntity entity : this.listGraphicalEntity)
-            if (entity instanceof Bullet)
-                moveBulletEntity((Bullet) entity, currentCenterX, currentCenterY);
+            if (entity instanceof Bullet && entity.getIfIsActive())
+                moveBulletEntity((Bullet) entity);
     }
 
     public void moveAnimalAndBulletEntity(int currentCenterX, int currentCenterY)
     {
         for(GraphicalEntity entity : this.listGraphicalEntity)
         {
-            if(entity instanceof Pig)
+            if(entity instanceof Pig && entity.getIfIsActive())
             {
                 movePigEntity((Animal) entity);
             }
-            else if (entity instanceof Wolf)
+            else if (entity instanceof Wolf && entity.getIfIsActive())
             {
                 moveWolfEntity((Wolf) entity, currentCenterX, currentCenterY);
             }
         }
     }
 
-    public void moveBulletEntity(Bullet bullet, int currentCenterX, int currentCenterY)
+    public void moveBulletEntity(Bullet bullet)
     {
-        Gameplay.DIRECTION direction = bullet.getDirection();
+        Gameplay.DIRECTION direction = bullet.getDIRECTION();
 
-        int directionXY[] = {0, 0};
-
+        int[] directionXY = {0, 0};
         int speed = bullet.getSpeed();
 
         switch (direction)
@@ -90,9 +89,14 @@ public class MovementEntity {
 
         bullet.increasePos(bullet, directionXY[0], directionXY[1]);
 
-        if (collisionEntity.checkCollisionBullet(bullet, this.listGraphicalEntity))
-            bullet.decreasePos(bullet, directionXY[0], directionXY[1]);
-
+        GraphicalEntity entity = collisionEntity.checkCollisionBullet(bullet, this.listGraphicalEntity);
+        if (!entity.equals(bullet)) {
+            bullet.setInactive();
+            if (entity instanceof Animal)
+                entity.setInactive();
+        }
+        else if (!bullet.decreaseNbrMovement())
+            bullet.setInactive();
     }
 
     public void moveWolfEntity(Wolf wolf, int currentCenterX, int currentCenterY)

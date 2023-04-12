@@ -58,7 +58,7 @@ public class CollisionEntity {
         return false;
     }
 
-    public boolean checkCollisionBullet(GraphicalEntity identity, List<GraphicalEntity> listGraphicalEntity)
+    public GraphicalEntity checkCollisionBullet(GraphicalEntity identity, List<GraphicalEntity> listGraphicalEntity)
     {
         Rectangle rectIdentity = identity.getBounds();                 // Rect of Player
         for(GraphicalEntity object : listGraphicalEntity)
@@ -70,10 +70,10 @@ public class CollisionEntity {
                 if (!object.equals(identity))                           // If != Player
                     if (rectIdentity.intersects(objectRect))           // Collision
                     {
-                        return true;
+                        return object;
                     }
             }
         }
-        return false;
+        return identity;
     }
 }

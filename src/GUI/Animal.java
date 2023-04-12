@@ -2,13 +2,12 @@ package GUI;
 
 public class Animal extends CollaborationEntity {
 
-    private final int speed = 30;
-    private final int run = 20;
-    private int[] direction = new int[]{speed, 0};              // x, y
+    private static final int SPEED = 30;
+    private static final int RUN = 20;
+    private final int[] direction = new int[]{SPEED, 0};              // x, y
 
     Animal(int posX, int posY, int width, int height, String path) {
         super(posX, posY, width, height, path);
-
     }
 
     public int getPosX()
@@ -22,12 +21,12 @@ public class Animal extends CollaborationEntity {
     }
 
     public int getSpeed() {
-        return this.speed;
+        return SPEED;
     }
 
     public int getRun()
     {
-        return this.run;
+        return RUN;
     }
 
     public int getDirectionX()
@@ -44,13 +43,13 @@ public class Animal extends CollaborationEntity {
     {
         if (increaseX != 0)
         {
-            this.direction[0] = speed * (increaseX / Math.abs(increaseX));      // récupérer le signe
+            this.direction[0] = SPEED * (increaseX / Math.abs(increaseX));      // récupérer le signe
             this.direction[1] = 0;
         }
         else if (increaseY != 0)
         {
             this.direction[0] = 0;
-            this.direction[1] = speed * (increaseY / Math.abs(increaseY));
+            this.direction[1] = SPEED * (increaseY / Math.abs(increaseY));
         }
         entity.setLocation(entity.getX() + increaseX, entity.getY() + increaseY);
     }

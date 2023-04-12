@@ -1,15 +1,17 @@
 package GUI;
 
-public class Bullet extends PhysicalEntity{
+public class Bullet extends CollaborationEntity{
 
-    private final static int SPEED = 10;
-    private int nbrMovement = 10;
-    private Gameplay.DIRECTION direction;
+    private final static int SPEED = 25;
+    private static int NbrAmmo = 5;
 
-    Bullet(int posX, int posY, int width, int height, String path, Gameplay.DIRECTION direction)
+    private int nbrMovement = 30;
+    private final Gameplay.DIRECTION DIRECTION;
+
+    Bullet(int posX, int posY, int width, int height, String path, Gameplay.DIRECTION DIRECTION)
     {
         super(posX, posY, width, height, path);
-        this.direction = direction;
+        this.DIRECTION = DIRECTION;
     }
 
     public boolean decreaseNbrMovement()
@@ -18,9 +20,9 @@ public class Bullet extends PhysicalEntity{
         return nbrMovement > 0;     // return true if > 0
     }
 
-    public Gameplay.DIRECTION getDirection()
+    public Gameplay.DIRECTION getDIRECTION()
     {
-        return this.direction;
+        return this.DIRECTION;
     }
 
     public int getSpeed()
@@ -33,8 +35,9 @@ public class Bullet extends PhysicalEntity{
         entity.setLocation(entity.getX() + increaseX, entity.getY() + increaseY);
     }
 
-    public void decreasePos(GraphicalEntity entity, int decreaseX, int decreaseY)
+    public static boolean decreaseNbrAmmo()
     {
-        entity.setLocation(entity.getX() - decreaseX, entity.getY() - decreaseY);
+        NbrAmmo--;
+        return NbrAmmo >= 0;
     }
 }

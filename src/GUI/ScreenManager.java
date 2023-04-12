@@ -145,12 +145,12 @@ public class ScreenManager extends JFrame implements KeyListener {
 
             if (player instanceof Player) {
                 Gameplay.DIRECTION direction = ((Player)player).getDirection();
-
-                // GET POSITION from player.Cursor.getPosXY ou player pour des collisions
-                System.out.println("Bullet Shoot");
-                Bullet bullet = new Bullet(this.WIND_WIDTH / 2 - 25, this.WIND_HEIGHT / 2 - 25, 20, 20, "TargetingCursor.png", direction);
-                this.listGraphicalEntity.add(10, bullet);       // FIX ME
-                this.add(bullet, 0);
+                if (Bullet.decreaseNbrAmmo()) {
+                    // GET POSITION from player.Cursor.getPosXY ou player pour des collisions
+                    Bullet bullet = new Bullet(this.WIND_WIDTH / 2 - 25, this.WIND_HEIGHT / 2 - 25, 20, 20, "TargetingCursor.png", direction);
+                    this.listGraphicalEntity.add(10, bullet);
+                    this.add(bullet, 0);
+                }
                 break;
             }
     }
