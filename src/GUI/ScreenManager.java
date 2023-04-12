@@ -81,15 +81,32 @@ public class ScreenManager extends JFrame implements KeyListener {
                         blocX = (int) Math.round((float) this.currentCenterX / 60.f + 0.5);
                     }
                 }
-                if (this.mapArray[blocX - 1][blocY - 1] == 0) {
+                String physicalBlockName = inventoryManager.getPhysicalBlockName(this.listGraphicalEntity, key);
+
+                {
                     posY = blocY * 60 - (this.currentCenterY - 250 + 30);
                     posX = blocX * 60 - (this.currentCenterX - 250 + 30);
-
-                    String physicalBlockName = inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
-
+// FIX ME mettre toutes les images avec le bon nom et refatoring
                     if (!physicalBlockName.equals("")) {
-                        this.mapArray[blocX - 1][blocY - 1] = 1;
-                        createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
+                        if (physicalBlockName.endsWith("Food.png")) {
+                            System.out.println("Vous avez manger" + physicalBlockName);
+                            inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
+                        }
+                        else if (physicalBlockName.endsWith("Physics.png")) {
+                            if (this.mapArray[blocX - 1][blocY - 1] == 0) {
+                                this.mapArray[blocX - 1][blocY - 1] = 1;
+                                inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
+                                createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
+                            }
+                        }
+                        else {
+                            if (this.mapArray[blocX - 1][blocY - 1] == 0)
+                            {
+                                System.out.println("Item inconnue");
+                                inventoryManager.tryToUseInventory(this.listGraphicalEntity, key);
+                                createNewBlock(physicalBlockName, posX, posY, blocX, blocY);
+                            }
+                        }
                     }
                 }
             }
@@ -145,7 +162,8 @@ public class ScreenManager extends JFrame implements KeyListener {
 
             if (player instanceof Player) {
                 Gameplay.DIRECTION direction = ((Player)player).getDirection();
-                if (Bullet.decreaseNbrAmmo()) {
+                if (((Player)player).getGun().Shoot())
+                {
                     // GET POSITION from player.Cursor.getPosXY ou player pour des collisions
                     Bullet bullet = new Bullet(this.WIND_WIDTH / 2 - 25, this.WIND_HEIGHT / 2 - 25, 20, 20, "TargetingCursor.png", direction);
                     this.listGraphicalEntity.add(10, bullet);

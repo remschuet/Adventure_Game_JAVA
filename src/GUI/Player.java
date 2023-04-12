@@ -6,6 +6,7 @@ public class Player extends PhysicalEntity {
     private final int WIND_HEIGHT;
     private final TargetingCursor targetingCursor;
     private Gameplay.DIRECTION direction;
+    private final Gun gun = new Gun();
 
     Player(int posX, int posY, int width, int height, String path, final int WIND_WIDTH, final int WIND_HEIGHT, TargetingCursor targetingCursor)
     {
@@ -23,14 +24,19 @@ public class Player extends PhysicalEntity {
         this.setBounds(this.WIND_WIDTH / 2 - 50, this.WIND_HEIGHT / 2 - 50, this.width, this.height);
     }
 
-    public void setDirection(Gameplay.DIRECTION direction)
+    public Gun getGun()
     {
-        this.direction = direction;
-        this.targetingCursor.setDirection(direction);
+        return this.gun;
     }
 
     public Gameplay.DIRECTION getDirection()
     {
         return this.direction;
+    }
+
+    public void setDirection(Gameplay.DIRECTION direction)
+    {
+        this.direction = direction;
+        this.targetingCursor.setDirection(direction);
     }
 }

@@ -26,6 +26,17 @@ public class InventoryManager {
         ((Inventory) inventory).setVisibility();
     }
 
+
+    public String getPhysicalBlockName(List<GraphicalEntity> listGraphicalEntity, char numberCallUser)
+    {
+        GraphicalEntity inventory = getInventory(listGraphicalEntity);
+        String physicalBlockName = "";
+        if(((Inventory) inventory).getVisibility() || numberCallUser == '0')
+            physicalBlockName = ((Inventory) inventory).getNameItem(Character.getNumericValue(numberCallUser));
+
+        return physicalBlockName;
+    }
+
     public String tryToUseInventory(List<GraphicalEntity> listGraphicalEntity, char numberCallUser)
     {   // use item of the inventory when user enter number 1 to 6
         GraphicalEntity inventory = getInventory(listGraphicalEntity);
