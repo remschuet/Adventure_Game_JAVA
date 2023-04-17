@@ -45,6 +45,14 @@ public class MapGenerator {
         this.mapArray[3][6] = 1;
         this.mapArray[2][6] = 1;
         this.mapArray[3][7] = 1;
+
+
+        for (int i= 17; i < 19; i++) {
+            this.mapArray[3][i] = 1;
+            this.mapArray[4][i] = 1;
+            this.mapArray[5][i] = 1;
+            this.mapArray[6][i] = 1;
+        }
     }
 
     private void setRock()
